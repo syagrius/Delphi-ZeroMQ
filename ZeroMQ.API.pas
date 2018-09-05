@@ -39,6 +39,8 @@ uses
 const
   LIBZEROMQ = 'libzmq.dll';
 
+{$WARN SYMBOL_PLATFORM OFF}
+
 {.$DEFINE EXPERIMENTAL}
 
 (******************************************************************************)

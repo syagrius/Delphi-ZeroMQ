@@ -8,3 +8,11 @@ __history
 *.exe
 *.dcu
 *.identcache
+/ZeroMQ 3.2.4/*.txt
+/ZeroMQ 3.2.4/bin/*.dll
+/ZeroMQ 3.2.4/doc/*.html
+/ZeroMQ 3.2.4/include/*.h
+/ZeroMQ 3.2.4/lib/*.lib
+/ZeroMQ 3.2.4/lib/*.pdb
+/guide/*.stat
+/guide/*.skincfg
