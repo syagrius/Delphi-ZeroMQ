@@ -134,7 +134,7 @@ function zmq_ctx_destroy(context: Pointer): Integer; cdecl; external LIBZEROMQ d
 (******************************************************************************)
 
 const
-  ZMQ_MAX_VSM_SIZE = 30;
+  ZMQ_MAX_VSM_SIZE = 64;
 
 type
   PZmqMsg = ^TZmqMsg;
@@ -218,7 +218,6 @@ const
   ZMQ_TCP_KEEPALIVE_CNT   = 35;
   ZMQ_TCP_KEEPALIVE_IDLE  = 36;
   ZMQ_TCP_KEEPALIVE_INTVL = 37;
-  ZMQ_TCP_ACCEPT_FILTER   = 38;
   ZMQ_IMMEDIATE           = 39;
   ZMQ_XPUB_VERBOSE        = 40;
   ZMQ_ROUTER_RAW          = 41;
@@ -236,9 +235,23 @@ const
   ZMQ_REQ_RELAXED         = 53;
   ZMQ_CONFLATE            = 54;
   ZMQ_ZAP_DOMAIN          = 55;
+  ZMQ_ROUTER_HANDOVER     = 56;
+  ZMQ_TOS                 = 57;
+  ZMQ_CONNECT_RID         = 61;
+  ZMQ_GSSAPI_SERVER       = 62;
+  ZMQ_GSSAPI_PRINCIPAL    = 63;
+  ZMQ_GSSAPI_SERVICE_PRINCIPAL
+                          = 64;
+  ZMQ_GSSAPI_PLAINTEXT    = 65;
+  ZMQ_HANDSHAKE_IVL       = 66;
+  ZMQ_SOCKS_PROXY         = 68;
+  ZMQ_XPUB_NODROP         = 69;
+
 
 (*  Message options                                                           *)
   ZMQ_MORE = 1;
+  ZMQ_SRCFD = 2;
+  ZMQ_SHARED = 3;
 
 (*  Send/recv options.                                                        *)
   ZMQ_DONTWAIT = 1;
@@ -248,8 +261,14 @@ const
   ZMQ_NULL  = 0;
   ZMQ_PLAIN = 1;
   ZMQ_CURVE = 2;
+  ZMQ_GSSAPI= 3;
 
 (*  Deprecated options and aliases                                            *)
+  ZMQ_TCP_ACCEPT_FILTER       = 38 deprecated;
+  ZMQ_IPC_FILTER_PID          = 58 deprecated;
+  ZMQ_IPC_FILTER_UID          = 59 deprecated;
+  ZMQ_IPC_FILTER_GID          = 60 deprecated;
+
   ZMQ_IPV4ONLY                = 31 deprecated;
   ZMQ_DELAY_ATTACH_ON_CONNECT = ZMQ_IMMEDIATE deprecated;
   ZMQ_NOBLOCK                 = ZMQ_DONTWAIT deprecated;
@@ -343,6 +362,8 @@ function zmq_poll(items: PZmqPollItem; nitems: Integer; timeout: LongInt): Integ
 (*  Built-in message proxy (3-way) *)
 
 function zmq_proxy(frontend, backend, capture: Pointer): Integer; cdecl; external LIBZEROMQ delayed;
+function zmq_proxy_steerable(frontend, backend, capture, control : Pointer): Integer; cdecl; external LIBZEROMQ delayed;
+
 
 (* These functions are documented by man pages                                *)
 
