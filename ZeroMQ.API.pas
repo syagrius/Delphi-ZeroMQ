@@ -37,7 +37,12 @@ uses
   winsock2;
 
 const
-  LIBZEROMQ = 'libzmq.dll';
+
+{$IFDEF CPUX64}
+  LIBZEROMQ = 'libzmq-4_2_30-win64.dll';
+{$ELSE}
+  LIBZEROMQ = 'libzmq-4_2_30.dll';
+{$ENDIF}
 
 {$WARN SYMBOL_PLATFORM OFF}
 
